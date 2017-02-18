@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="medias_fc">
+        <item>134</item>
+        <item>141</item>
+        <item>148</item>
+        <item>155</item>
+        <item>162</item>
+        <item>169</item>
+    </string-array>
+
+</resources>

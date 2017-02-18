@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.furazin.android.calorias.MainActivity">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:layout_marginTop="189dp"
+        android:layout_below="@+id/textViewFC"
+        android:layout_alignParentStart="true">
+
+        <TextView
+        android:text="Tiempo: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:id="@+id/TextViewTiempo" />
+
+        <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextViewCalorias"
+        android:textSize="30dp"
+        android:layout_below="@+id/botoncalcular"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+        <Button
+        android:text="Calcular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/botoncalcular"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="CalcularCalorias"    />
+
+        <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:gravity="center"
+        android:id="@+id/editTextTiempo"
+        android:layout_below="@+id/TextViewTiempo"
+        android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:layout_marginTop="129dp"
+        android:layout_below="@+id/textViewFC"
+        android:layout_alignParentStart="true">
+
+        <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:hint="Introduce peso"
+        android:gravity="center"
+        android:id="@+id/editTextPeso" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spNumbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:entries="@array/medias_fc"
+        android:spinnerMode="dialog"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/textViewFC"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+    android:text="Peso:"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:gravity="center"
+    android:typeface="sans"
+    android:textSize="22dp"
+    android:textStyle="bold"
+    android:id="@+id/textViewPeso"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/spNumbers"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+    android:text="FC media:"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="40dp"
+    android:gravity="center"
+    android:typeface="sans"
+    android:textSize="22dp"
+    android:textStyle="bold"
+    android:id="@+id/textViewFC"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

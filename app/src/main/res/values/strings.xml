@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Calorias</string>
+    <string name="section_title">Calorias</string>
+    <string name="title_section1">Calorías</string>
+    <string name="title_section2">Historial</string>
+    <string name="action_settings">Preferencias</string>
+</resources>
