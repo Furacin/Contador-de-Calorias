@@ -1,25 +1,23 @@
 package com.furazin.android.calorias;
 
-import java.util.Date;
-
 /**
  * Created by manza on 19/02/2017.
  */
 
 public class Resultado {
-    private Date fecha;
-    private double numero;
+    private String fecha;
+    private String numero;
 
-    public Resultado(Date fecha, double numero) {
+    public Resultado(String fecha, String numero) {
         this.fecha = fecha;
         this.numero = numero;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public double getNumero() {
+    public String getNumero() {
         return numero;
     }
 }

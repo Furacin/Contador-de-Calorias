@@ -9,7 +9,7 @@ public class RegistroDbSchema {
         public static final String NAME = "users";
 
         public static final class Cols {
-            public static final String RESULT = "resultado";
+            public static final String VALOR = "resultado";
             public static final String DATE = "date";
         }
     }

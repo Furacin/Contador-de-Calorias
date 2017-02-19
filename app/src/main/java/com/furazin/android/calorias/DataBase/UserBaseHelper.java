@@ -21,7 +21,7 @@ public class UserBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + UserTable.NAME + "(" +
                 UserTable.Cols.DATE + ", " +
-                UserTable.Cols.RESULT +
+                UserTable.Cols.VALOR +
                 ")"
         );
     }
