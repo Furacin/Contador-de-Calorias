@@ -2,7 +2,6 @@ package com.furazin.android.calorias;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,12 +16,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.furazin.android.calorias.DataBase.UserBaseHelper;
-import com.furazin.android.calorias.DataBase.UserCursorWrapper;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static com.furazin.android.calorias.DataBase.RegistroDbSchema.UserTable;
 
@@ -35,7 +31,7 @@ public class FirstFragment extends Fragment {
     // Variables para la BD
 //    private List<Resultado> users;
     private Context context;
-    private SQLiteDatabase mDatabase;
+    public static SQLiteDatabase mDatabase;
 
     public static final String ARG_PAGE = "ARG_PAGE";
     Button boton_calcular;
@@ -134,10 +130,11 @@ public class FirstFragment extends Fragment {
 
         double calorias = tiempo * (MET * 3.5 * peso) / 200;
         calorias = Math.ceil(calorias);
+
         // Insertamos en BD
         ContentValues values = getContentValues(calorias);
         mDatabase.insert(UserTable.NAME, null, values);
-        getResultados();
+        //getResultados();
 
         return calorias;
     }
@@ -154,38 +151,6 @@ public class FirstFragment extends Fragment {
         return values;
     }
 
-    private UserCursorWrapper queryUsers(String whereClause, String[] whereArgs) {
-        Cursor cursor = mDatabase.query (
-                UserTable.NAME,
-                null,
-                whereClause,
-                whereArgs,
-                null,
-                null,
-                null
-        );
 
-        return new UserCursorWrapper(cursor);
-    }
-
-    public void getResultados() {
-
-        List<Resultado> resultados = new ArrayList<>();
-
-        UserCursorWrapper cursor = queryUsers(null, null);
-        try{
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                resultados.add(cursor.getResultado());
-                cursor.moveToNext();
-            }
-        } finally {
-            cursor.close();
-        }
-
-//        for (Resultado res: resultados) {
-//            System.out.println(res.getNumero() + " - " + res.getFecha() );
-//        }
-    }
 
 }
