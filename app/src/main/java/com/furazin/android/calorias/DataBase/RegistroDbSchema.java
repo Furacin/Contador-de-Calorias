@@ -5,4 +5,12 @@ package com.furazin.android.calorias.DataBase;
  */
 
 public class RegistroDbSchema {
+    public static final class UserTable {
+        public static final String NAME = "users";
+
+        public static final class Cols {
+            public static final String RESULT = "resultado";
+            public static final String DATE = "date";
+        }
+    }
 }

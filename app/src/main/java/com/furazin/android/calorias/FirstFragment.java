@@ -1,5 +1,7 @@
 package com.furazin.android.calorias;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,11 +14,20 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.furazin.android.calorias.DataBase.UserBaseHelper;
+
+import java.util.List;
+
 /**
  * Created by manza on 17/02/2017.
  */
 
 public class FirstFragment extends Fragment {
+
+    // Variables para la BD
+    private List<Resultado> users;
+    private Context context;
+    private SQLiteDatabase mDatabase;
 
     public static final String ARG_PAGE = "ARG_PAGE";
     Button boton_calcular;
@@ -32,6 +43,7 @@ public class FirstFragment extends Fragment {
         args.putInt(ARG_PAGE, page);
         FirstFragment fragment = new FirstFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -65,6 +77,10 @@ public class FirstFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         mPage = getArguments().getInt(ARG_PAGE);
+
+        // BD
+        context = getActivity();
+        mDatabase = new UserBaseHelper(context).getWritableDatabase();
     }
 
     @Override
