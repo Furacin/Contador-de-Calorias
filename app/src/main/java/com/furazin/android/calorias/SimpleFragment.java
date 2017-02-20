@@ -3,6 +3,7 @@ package com.furazin.android.calorias;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +39,7 @@ public abstract class SimpleFragment extends Fragment {
     protected BarData generateBarData(int dataSets, float range, int count) {
 
         ArrayList<IBarDataSet> sets = new ArrayList<IBarDataSet>();
+        // Variables para obtener datos de la BD
         Resultado res = new Resultado();
         List<Resultado> lista_resultado = res.getResultadosBD();
 
@@ -46,8 +49,94 @@ public abstract class SimpleFragment extends Fragment {
 
 //            entries = FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "stacked_bars.txt");
 
-            for(int j = 0; j < lista_resultado.size(); j++) {
-                entries.add(new BarEntry(j, Integer.parseInt(lista_resultado.get(j).getNumero())));
+            // Algoritmo para obtener los datos correctamente en la grafica a traves de la base de datos
+            int dias_mes = 0;
+            boolean es_bisiesto = false;
+
+            Date date = new Date();
+            String dayNumber = (String) DateFormat.format("dd",   date);
+            String monthNumber  = (String) DateFormat.format("MM",   date); //
+            String yearNumber = (String) DateFormat.format("yyyy", date); // 2013
+
+            // ¿Es bisiesto?
+            es_bisiesto = (Integer.parseInt(yearNumber) % 4 == 0)?true:false;
+
+            switch(monthNumber) {
+                case "02":
+                    dias_mes = (!es_bisiesto)?28:29;
+                    break;
+                case "01":
+                    dias_mes = 31;
+                    break;
+                case "03":
+                    dias_mes = 31;
+                    break;
+                case "05":
+                    break;
+                case "07":
+                    dias_mes = 31;
+                    break;
+                case "08":
+                    dias_mes = 31;
+                    break;
+                case "10":
+                    dias_mes = 31;
+                    break;
+                case "12":
+                    dias_mes = 31;
+                    break;
+                case "04":
+                    dias_mes = 30;
+                    break;
+                case "06":
+                    dias_mes = 30;
+                    break;
+                case "09":
+                    dias_mes = 30;
+                    break;
+                case "11":
+                    dias_mes = 30;
+                    break;
+                default:
+                    break;
+            }
+
+//            // Inicializamos los datos del grafico
+//            for(int j = 0; j < dias_mes; j++) {
+//                entries.add(new BarEntry(j, 0));
+//            }
+
+            int dia_actual = Integer.parseInt(dayNumber);
+
+            // Inicializamos con un valor 0 hasta el día actual
+            for (int l=0; l<dia_actual; l++) {
+                entries.add(new BarEntry(l,0));
+            }
+
+            int cont = 0;
+            // Iteramos desde el día actual hasta los datos que haya registrados
+            for(int j = dia_actual; j < dia_actual + lista_resultado.size(); j++) {
+                entries.add(new BarEntry(j, Integer.parseInt(lista_resultado.get(cont).getNumero())));
+                cont++;
+            }
+
+            //
+            if (lista_resultado.size()<dias_mes-dia_actual) {
+                for (int k=lista_resultado.size(); k < dias_mes - lista_resultado.size(); k++) {
+                    entries.add(new BarEntry(k,0));
+                }
+            }
+            else {
+                if (lista_resultado.size()==dias_mes-dia_actual) {
+                    for (int k=lista_resultado.size(); k < dias_mes - lista_resultado.size(); k++) {
+                        entries.set(k,new BarEntry(k,0));
+                    }
+                }
+            }
+
+
+            for (int k=lista_resultado.size(); k < dias_mes - lista_resultado.size(); k++) {
+                entries.add(k,new BarEntry(k,0));
             }
 
             BarDataSet ds = new BarDataSet(entries, getLabel(i));

@@ -145,12 +145,16 @@ public class FirstFragment extends Fragment {
 
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
+        Resultado res = new Resultado();
+        // Comprobamos que ya hay un valor de calorias en una fecha (solo puede haver uno)
+        boolean exist = res.CheckDateRow(date);
+
+        if (exist)
+            res.EliminarRow(date);
         values.put(UserTable.Cols.VALOR, resultado);
-        values.put(UserTable.Cols.DATE,date);
+        values.put(UserTable.Cols.DATE, date);
 
         return values;
     }
-
-
 
 }
